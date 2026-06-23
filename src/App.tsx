@@ -1,23 +1,34 @@
-import './index.css'
+import { useState } from 'react'
+
+import WelcomeScreen from './screens/WelcomeScreen'
+import QuizScreen from './screens/QuizScreen'
+import ScratchScreen from './screens/ScratchScreen'
+import RevealScreen from './screens/RevealScreen'
+
+type Screen = 'welcome' | 'quiz' | 'scratch' | 'revealMap'
 
 function App() {
+    const [currentScreen, setCurrentScreen] = useState<Screen>('welcome')
 
-  return (
-      <main className="app">
-        <section className="screen">
-          <h1>Mission 30 ans</h1>
+    return (
+        <main className="app">
+            {currentScreen === 'welcome' && (
+                <WelcomeScreen onStart={() => setCurrentScreen('quiz')} />
+            )}
 
-          <p>
-            Une surprise t'attend ...
-          </p>
+            {currentScreen === 'quiz' && (
+                <QuizScreen onComplete={() => setCurrentScreen('scratch')} />
+            )}
 
-          <button>
-            Commencer
-          </button>
+            {currentScreen === 'scratch' && (
+                <ScratchScreen onReveal={() => setCurrentScreen('revealMap')} />
+            )}
 
-        </section>
-      </main>
-  )
+            {currentScreen === 'revealMap' && (
+                <RevealScreen onRestart={() => setCurrentScreen('welcome')} />
+            )}
+        </main>
+    )
 }
 
 export default App
