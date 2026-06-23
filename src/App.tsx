@@ -1,10 +1,9 @@
-import './App.css'
 import './index.css'
 
 function App() {
 
   return (
-      <main className="App">
+      <main className="app">
         <section className="screen">
           <h1>Mission 30 ans</h1>
 
