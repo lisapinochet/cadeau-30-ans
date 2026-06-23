@@ -1,23 +1,33 @@
+import { useState } from 'react'
+import ScratchCard from '../components/ScratchCard'
+
 type ScratchScreenProps = {
     onReveal: () => void
 }
 
 function ScratchScreen({ onReveal }: ScratchScreenProps) {
+    const [isScratched, setIsScratched] = useState(false)
+
     return (
         <section className="screen">
-
             <h1>Bravo ❤️</h1>
 
             <p>
-                Tu as réussi la mission. Ton ticket cadeau est débloqué.
+                Tu as réussi la mission. Ton ticket secret est débloqué.
             </p>
 
-            <div className="placeholder-card">
-                <p>Ticket à gratter à venir</p>
-            </div>
+            <ScratchCard onComplete={() => setIsScratched(true)}>
+                <div className="scratch-reward">
+                    <p>Surprise !</p>
+                    <strong>Un week-end au bord de l’océan 🌊</strong>
+                </div>
+            </ScratchCard>
 
-            <button onClick={onReveal}>
-                Révéler le cadeau
+            <button
+                disabled={!isScratched}
+                onClick={onReveal}
+            >
+                {isScratched ? 'Continuer' : 'Gratte le ticket pour continuer'}
             </button>
         </section>
     )
