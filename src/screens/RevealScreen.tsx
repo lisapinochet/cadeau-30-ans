@@ -5,7 +5,6 @@ type RevealScreenProps = {
 function RevealScreen({ onRestart }: RevealScreenProps) {
     return (
         <section className="screen">
-            <p className="screen-step">Étape 4 sur 4</p>
 
             <h1>Surprise !</h1>
 

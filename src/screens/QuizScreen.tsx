@@ -5,7 +5,6 @@ type QuizScreenProps = {
 function QuizScreen({ onComplete }: QuizScreenProps) {
     return (
         <section className="screen">
-            <p className="screen-step">Etape 2 sur 6</p>
 
             <h1>Quiz</h1>
 

@@ -5,7 +5,6 @@ type ScratchScreenProps = {
 function ScratchScreen({ onReveal }: ScratchScreenProps) {
     return (
         <section className="screen">
-            <p className="screen-step">Étape 3 sur 4</p>
 
             <h1>Bravo ❤️</h1>
 

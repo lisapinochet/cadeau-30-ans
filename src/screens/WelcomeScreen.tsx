@@ -5,7 +5,6 @@ type WelcomeScreenProps = {
 function WelcomeScreen({ onStart }: WelcomeScreenProps) {
     return (
         <section className="screen">
-            <p className="screen-step">Étape 1 sur 6</p>
 
             <h1>Mission 30 ans</h1>
 
