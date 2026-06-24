@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import ScratchCard from '../components/ScratchCard'
+import ConfettiBurst from "../components/ConfettiBurst.tsx";
 
 type ScratchScreenProps = {
     onReveal: () => void
@@ -10,6 +11,8 @@ function ScratchScreen({ onReveal }: ScratchScreenProps) {
 
     return (
         <section className="screen">
+            <ConfettiBurst />
+
             <h1>Bravo ❤️</h1>
 
             <p>

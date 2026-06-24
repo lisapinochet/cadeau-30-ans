@@ -268,7 +268,7 @@ button {
 
 .item-surf {
   left: 2%;
-  bottom: 24%;
+  bottom: 15%;
 }
 
 .item-surf .floating-item-content {
@@ -296,7 +296,7 @@ button {
 
 .item-kitesurf-2 {
   right: 1%;
-  top: 10%;
+  top: 6%;
   bottom: auto;
   left: auto;
 }
@@ -311,7 +311,7 @@ button {
 
 .item-pool {
   left: 45%;
-  bottom: 10%;
+  bottom: 5%;
   transform: translateX(-50%);
 }
 
@@ -320,12 +320,12 @@ button {
 }
 
 .item-pool .floating-image {
-  width: 110px;
+  width: 80px;
 }
 
 .item-surf-2 {
   left: 9%;
-  top: 15%;
+  top: 8%;
 }
 
 .item-surf-2 .floating-item-content {
@@ -338,7 +338,7 @@ button {
 
 .item-cocktail {
   left: 7%;
-  bottom: 5%;
+  bottom: 6%;
 }
 
 .item-cocktail .floating-item-content {
@@ -346,12 +346,12 @@ button {
 }
 
 .item-cocktail .floating-image {
-  width: 64px;
+  width: 50px;
 }
 
 .item-bbq {
   right: 8%;
-  bottom: 5%;
+  bottom: 2%;
 }
 
 .item-bbq .floating-item-content {
@@ -364,7 +364,7 @@ button {
 
 .item-cat {
   left: 50%;
-  top: 4%;
+  top: 2%;
   transform: translateX(-50%);
 }
 
