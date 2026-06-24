@@ -22,7 +22,7 @@ function ScratchScreen({ onReveal }: ScratchScreenProps) {
             <ScratchCard onComplete={() => setIsScratched(true)}>
                 <img
                     className="scratch-photo"
-                    src="/images/booking.PNG"
+                    src={`${import.meta.env.BASE_URL}images/booking.PNG`}
                     alt="Photo du cadeau surprise"
                 />
             </ScratchCard>

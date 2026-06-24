@@ -20,41 +20,57 @@ type FloatingItemProps = FloatingItemData & {
     motion: Motion
 }
 
+const getImagePath = (fileName: string) => {
+    return `${import.meta.env.BASE_URL}images/${fileName}`
+}
+
 const floatingItems: FloatingItemData[] = [
+    {
+        className: 'item-pool',
+        depth: 0.2,
+        src: getImagePath('pool.png'),
+        alt: 'Piscine',
+    },
     {
         className: 'item-surf',
         depth: 0.8,
-        src: '/images/surf.png',
+        src: getImagePath('surf.png'),
         alt: 'Surf',
+    },
+    {
+        className: 'item-kite',
+        depth: 1,
+        src: getImagePath('kitesurf.png'),
+        alt: 'Kitesurf',
     },
     {
         className: 'item-kitesurf-2',
         depth: 0.9,
-        src: '/images/kitesurf2.png',
+        src: getImagePath('kitesurf2.png'),
         alt: 'Kitesurf',
     },
     {
         className: 'item-surf-2',
         depth: 0.75,
-        src: '/images/surf2.png',
+        src: getImagePath('surf2.png'),
         alt: 'Surf',
     },
     {
         className: 'item-cocktail',
         depth: 0.7,
-        src: '/images/cocktail.png',
+        src: getImagePath('cocktail.png'),
         alt: 'Cocktail',
     },
     {
         className: 'item-bbq',
         depth: 0.45,
-        src: '/images/bbq.png',
+        src: getImagePath('bbq.png'),
         alt: 'Barbecue',
     },
     {
         className: 'item-cat',
         depth: 0.6,
-        src: '/images/cat.png',
+        src: getImagePath('cat.png'),
         alt: 'Chat',
     },
 ]
@@ -141,7 +157,6 @@ function FloatingScene({ onReady }: FloatingSceneProps) {
         }
 
         const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
-
             if (event.gamma === null || event.beta === null) {
                 return
             }

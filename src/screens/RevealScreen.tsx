@@ -39,7 +39,7 @@ function RevealScreen({ onRestart }: RevealScreenProps) {
 
                     <img
                         className="stay-image"
-                        src="/images/booking.PNG"
+                        src={`${import.meta.env.BASE_URL}images/booking.PNG`}
                         alt="Casa de Paraventa"
                     />
 
