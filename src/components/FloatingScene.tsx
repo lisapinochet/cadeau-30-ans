@@ -1,11 +1,25 @@
 function FloatingScene() {
     return (
         <div className="floating-scene">
-            <div className="floating-item item-pool">🏊</div>
-            <div className="floating-item item-surf">🏄</div>
-            <div className="floating-item item-kite">🪁</div>
-            <div className="floating-item item-bbq">🔥</div>
-            <div className="floating-item item-cat">🐈</div>
+            <div className="floating-item-position item-pool">
+                <div className="floating-item-content">🏊</div>
+            </div>
+
+            <div className="floating-item-position item-surf">
+                <div className="floating-item-content">🏄</div>
+            </div>
+
+            <div className="floating-item-position item-kite">
+                <div className="floating-item-content">🪁</div>
+            </div>
+
+            <div className="floating-item-position item-bbq">
+                <div className="floating-item-content">🔥</div>
+            </div>
+
+            <div className="floating-item-position item-cat">
+                <div className="floating-item-content">🐈</div>
+            </div>
         </div>
     )
 }
