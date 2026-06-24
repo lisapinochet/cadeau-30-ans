@@ -7,34 +7,63 @@ type RevealScreenProps = {
 
 function RevealScreen({ onRestart }: RevealScreenProps) {
     const [isReady, setIsReady] = useState(false)
+    const [isRevealed, setIsRevealed] = useState(false)
+
+    const handleSceneReady = () => {
+        setIsReady(true)
+
+        window.setTimeout(() => {
+            setIsRevealed(true)
+        }, 900)
+    }
 
     return (
         <section
-            className={
-                isReady
-                    ? 'screen reveal-screen reveal-screen-ready'
-                    : 'screen reveal-screen reveal-screen-loading'
-            }
+            className={[
+                'screen',
+                'reveal-screen',
+                isReady ? 'reveal-screen-ready' : 'reveal-screen-loading',
+                isRevealed ? 'reveal-screen-revealed' : '',
+            ].join(' ')}
         >
-            <FloatingScene onReady={() => setIsReady(true)} />
+            <FloatingScene onReady={handleSceneReady} />
+
+            <div className="reveal-intro">
+                <span>La surprise est prête</span>
+                <strong>Casa de Paraventa</strong>
+            </div>
 
             <div className="reveal-content">
-                <h1>Surprise !</h1>
+                <div className="stay-recap">
+                    <h1>Séjour à Casa de Paraventa</h1>
 
-                <p>
-                    Pour tes 30 ans, une escapade spéciale t’attend.
-                </p>
+                    <img
+                        className="stay-image"
+                        src="/images/booking.PNG"
+                        alt="Casa de Paraventa"
+                    />
 
-                <div className="placeholder-card">
-                    <p>Map design à venir</p>
+                    <div className="stay-details-grid">
+                        <div className="stay-detail-card">
+                            <span className="stay-detail-label">Durée</span>
+                            <strong>2 nuits</strong>
+                        </div>
 
-                    <ul>
-                        <li>📍 Hébergement</li>
-                        <li>🌊 Spot de surf</li>
-                        <li>🪁 Spot de kitesurf</li>
-                        <li>🍽️ Restaurant</li>
-                        <li>📸 Point de vue</li>
-                    </ul>
+                        <div className="stay-detail-card">
+                            <span className="stay-detail-label">Dates</span>
+                            <strong>17 au 19 juillet</strong>
+                        </div>
+
+                        <div className="stay-detail-card">
+                            <span className="stay-detail-label">Lagoa de Óbidos</span>
+                            <strong>17 min</strong>
+                        </div>
+
+                        <div className="stay-detail-card">
+                            <span className="stay-detail-label">Supertubos</span>
+                            <strong>20 min</strong>
+                        </div>
+                    </div>
                 </div>
 
                 <button className="primary-button" onClick={onRestart}>

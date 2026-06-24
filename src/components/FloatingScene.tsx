@@ -22,22 +22,10 @@ type FloatingItemProps = FloatingItemData & {
 
 const floatingItems: FloatingItemData[] = [
     {
-        className: 'item-pool',
-        depth: 0.2,
-        src: '/images/pool.png',
-        alt: 'Piscine',
-    },
-    {
         className: 'item-surf',
         depth: 0.8,
         src: '/images/surf.png',
         alt: 'Surf',
-    },
-    {
-        className: 'item-kite',
-        depth: 1,
-        src: '/images/kitesurf.png',
-        alt: 'Kitesurf',
     },
     {
         className: 'item-kitesurf-2',

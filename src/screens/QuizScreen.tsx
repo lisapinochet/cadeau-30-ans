@@ -17,29 +17,73 @@ type Question = {
 
 const questions: Question[] = [
     {
-        question: 'Quel est la date de mon anniversaire ?',
+        question: 'Pourquoi est-ce que tu as le droit à cette surprise ?',
         answers: [
-            { label: '6 septembre', isCorrect: false },
-            { label: '7 septembre', isCorrect: false },
-            { label: '8 septembre', isCorrect: true },
+            {
+                label: 'Parce que tu n’as pas mis une ambiance de merde en pétant aujourd’hui',
+                isCorrect: false,
+            },
+            {
+                label: 'Parce que tu fêtes tes 30 ans',
+                isCorrect: true,
+            },
+            {
+                label: 'Parce que tu as gagné un concours secret',
+                isCorrect: false,
+            },
         ],
     },
-
     {
-        question: 'Pourquoi cette surprise est spéciale ?',
+        question: 'Quelle est la date de mon anniversaire ?',
         answers: [
-            { label: 'Parce que c’est samedi', isCorrect: false },
-            { label: 'Parce que tu as 30 ans ️', isCorrect: true },
-            { label: 'Parce que tu as encore pété', isCorrect: false },
+            {
+                label: '09/08/1996',
+                isCorrect: false,
+            },
+            {
+                label: '08/09/1996',
+                isCorrect: true,
+            },
+            {
+                label: '07/08/1996',
+                isCorrect: false,
+            },
         ],
     },
-
     {
-        question: 'Quelle activité pourrait bien être au programme ?',
+        question: 'Quelle est la plus belle femme du monde ?',
         answers: [
-            { label: 'Tricot intensif', isCorrect: false },
-            { label: 'Cours de comptabilité', isCorrect: false },
-            { label: 'Surf ou kitesurf', isCorrect: true },
+            {
+                label: 'Miss Monde',
+                isCorrect: false,
+            },
+            {
+                label: 'Natalie Portman',
+                isCorrect: false,
+            },
+            {
+                label: 'Lisa',
+                isCorrect: true,
+            },
+        ],
+    },
+    {
+        question: 'D’après toi, qu’est-ce qu’il pourrait y avoir dans cette surprise ?',
+        answers: [
+
+            {
+                label: 'Du tricot intensif et une tisane',
+                isCorrect: false,
+            },
+            {
+                label: 'Un stage de comptabilité sur Excel',
+                isCorrect: false,
+            },
+
+            {
+                label: 'Un peu de sport nautique',
+                isCorrect: true,
+            },
         ],
     },
 ]
@@ -48,9 +92,21 @@ function QuizScreen({ onComplete }: QuizScreenProps) {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
     const [selectedAnswerIndex, setSelectedAnswerIndex] = useState<number | null>(null)
     const [feedback, setFeedback] = useState<string | null>(null)
+    const [showTransition, setShowTransition] = useState(false)
 
     const currentQuestion = questions[currentQuestionIndex]
     const isLastQuestion = currentQuestionIndex === questions.length - 1
+
+    const goToNextQuestion = () => {
+        if (isLastQuestion) {
+            onComplete()
+            return
+        }
+
+        setCurrentQuestionIndex(currentQuestionIndex + 1)
+        setSelectedAnswerIndex(null)
+        setFeedback(null)
+    }
 
     const handleAnswerClick = (answerIndex: number) => {
         const selectedAnswer = currentQuestion.answers[answerIndex]
@@ -64,16 +120,40 @@ function QuizScreen({ onComplete }: QuizScreenProps) {
 
         setFeedback('Bonne réponse ❤️')
 
-        setTimeout(() => {
-            if (isLastQuestion) {
-                onComplete()
+        window.setTimeout(() => {
+            if (currentQuestionIndex === 0) {
+                setShowTransition(true)
+                setSelectedAnswerIndex(null)
+                setFeedback(null)
                 return
             }
 
-            setCurrentQuestionIndex(currentQuestionIndex + 1)
-            setSelectedAnswerIndex(null)
-            setFeedback(null)
+            goToNextQuestion()
         }, 700)
+    }
+
+    if (showTransition) {
+        return (
+            <section className="screen">
+                <h1>Attends, attends...</h1>
+
+                <p>
+                    Ça ne va pas être si simple. Avant de découvrir ton cadeau, petite
+                    vérification d’usage : il faut d’abord prouver que tu mérites vraiment
+                    cette surprise 😏
+                </p>
+
+                <button
+                    className="primary-button"
+                    onClick={() => {
+                        setShowTransition(false)
+                        setCurrentQuestionIndex(1)
+                    }}
+                >
+                    Ok, je suis prêt
+                </button>
+            </section>
+        )
     }
 
     return (
