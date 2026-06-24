@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import FloatingScene from '../components/FloatingScene'
 
 type RevealScreenProps = {
@@ -5,9 +6,17 @@ type RevealScreenProps = {
 }
 
 function RevealScreen({ onRestart }: RevealScreenProps) {
+    const [isReady, setIsReady] = useState(false)
+
     return (
-        <section className="screen reveal-screen">
-            <FloatingScene />
+        <section
+            className={
+                isReady
+                    ? 'screen reveal-screen reveal-screen-ready'
+                    : 'screen reveal-screen reveal-screen-loading'
+            }
+        >
+            <FloatingScene onReady={() => setIsReady(true)} />
 
             <div className="reveal-content">
                 <h1>Surprise !</h1>

@@ -5,14 +5,95 @@ type Motion = {
     y: number
 }
 
-type FloatingItemProps = {
-    className: string
-    depth: number
-    motion: Motion
-    children: string
+type FloatingSceneProps = {
+    onReady?: () => void
 }
 
-function FloatingItem({ className, depth, motion, children }: FloatingItemProps) {
+type FloatingItemData = {
+    className: string
+    depth: number
+    src: string
+    alt: string
+}
+
+type FloatingItemProps = FloatingItemData & {
+    motion: Motion
+}
+
+const floatingItems: FloatingItemData[] = [
+    {
+        className: 'item-pool',
+        depth: 0.2,
+        src: '/images/pool.png',
+        alt: 'Piscine',
+    },
+    {
+        className: 'item-surf',
+        depth: 0.8,
+        src: '/images/surf.png',
+        alt: 'Surf',
+    },
+    {
+        className: 'item-kite',
+        depth: 1,
+        src: '/images/kitesurf.png',
+        alt: 'Kitesurf',
+    },
+    {
+        className: 'item-kitesurf-2',
+        depth: 0.9,
+        src: '/images/kitesurf2.png',
+        alt: 'Kitesurf',
+    },
+    {
+        className: 'item-surf-2',
+        depth: 0.75,
+        src: '/images/surf2.png',
+        alt: 'Surf',
+    },
+    {
+        className: 'item-cocktail',
+        depth: 0.7,
+        src: '/images/cocktail.png',
+        alt: 'Cocktail',
+    },
+    {
+        className: 'item-bbq',
+        depth: 0.45,
+        src: '/images/bbq.png',
+        alt: 'Barbecue',
+    },
+    {
+        className: 'item-cat',
+        depth: 0.6,
+        src: '/images/cat.png',
+        alt: 'Chat',
+    },
+]
+
+function preloadImage(src: string) {
+    return new Promise<void>((resolve) => {
+        const image = new Image()
+
+        image.src = src
+
+        if (image.complete) {
+            resolve()
+            return
+        }
+
+        image.onload = () => resolve()
+        image.onerror = () => resolve()
+    })
+}
+
+function FloatingItem({
+                          className,
+                          depth,
+                          motion,
+                          src,
+                          alt,
+                      }: FloatingItemProps) {
     return (
         <div className={`floating-item-position ${className}`}>
             <div
@@ -22,15 +103,39 @@ function FloatingItem({ className, depth, motion, children }: FloatingItemProps)
                 }}
             >
                 <div className="floating-item-content">
-                    {children}
+                    <img
+                        className="floating-image"
+                        src={src}
+                        alt={alt}
+                        loading="eager"
+                        decoding="async"
+                    />
                 </div>
             </div>
         </div>
     )
 }
 
-function FloatingScene() {
+function FloatingScene({ onReady }: FloatingSceneProps) {
     const [motion, setMotion] = useState<Motion>({ x: 0, y: 0 })
+    const [imagesLoaded, setImagesLoaded] = useState(false)
+
+    useEffect(() => {
+        let isMounted = true
+
+        Promise.all(floatingItems.map((item) => preloadImage(item.src))).then(() => {
+            if (!isMounted) {
+                return
+            }
+
+            setImagesLoaded(true)
+            onReady?.()
+        })
+
+        return () => {
+            isMounted = false
+        }
+    }, [onReady])
 
     useEffect(() => {
         const handlePointerMove = (event: PointerEvent) => {
@@ -59,26 +164,21 @@ function FloatingScene() {
     }, [])
 
     return (
-        <div className="floating-scene">
-            <FloatingItem className="item-pool" depth={0.2} motion={motion}>
-                🏊
-            </FloatingItem>
-
-            <FloatingItem className="item-surf" depth={0.8} motion={motion}>
-                🏄
-            </FloatingItem>
-
-            <FloatingItem className="item-kite" depth={1} motion={motion}>
-                🪁
-            </FloatingItem>
-
-            <FloatingItem className="item-bbq" depth={0.45} motion={motion}>
-                🔥
-            </FloatingItem>
-
-            <FloatingItem className="item-cat" depth={0.6} motion={motion}>
-                🐈
-            </FloatingItem>
+        <div
+            className={
+                imagesLoaded
+                    ? 'floating-scene floating-scene-ready'
+                    : 'floating-scene floating-scene-loading'
+            }
+        >
+            {imagesLoaded &&
+                floatingItems.map((item) => (
+                    <FloatingItem
+                        key={item.src}
+                        {...item}
+                        motion={motion}
+                    />
+                ))}
         </div>
     )
 }
