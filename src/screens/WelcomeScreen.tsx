@@ -6,7 +6,7 @@ function WelcomeScreen({ onStart }: WelcomeScreenProps) {
     return (
         <section className="screen">
 
-            <h1>Mission 30 ans</h1>
+            <h1>Mission spéciale<br /> pour mon POUP </h1>
 
             <p>Une surprise t’attend...</p>
 
