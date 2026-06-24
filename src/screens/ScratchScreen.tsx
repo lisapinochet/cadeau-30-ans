@@ -25,6 +25,7 @@ function ScratchScreen({ onReveal }: ScratchScreenProps) {
             </ScratchCard>
 
             <button
+                className="primary-button"
                 disabled={!isScratched}
                 onClick={onReveal}
             >

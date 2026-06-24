@@ -10,7 +10,7 @@ function WelcomeScreen({ onStart }: WelcomeScreenProps) {
 
             <p>Une surprise t’attend...</p>
 
-            <button onClick={onStart}>
+            <button className="primary-button" onClick={onStart}>
                 Commencer
             </button>
         </section>
