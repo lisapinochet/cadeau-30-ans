@@ -254,6 +254,11 @@ button {
   will-change: transform;
 }
 
+.floating-item-parallax {
+  transition: transform 120ms ease-out;
+  will-change: transform;
+}
+
 .item-pool {
   left: 50%;
   bottom: 24px;
