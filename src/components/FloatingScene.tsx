@@ -26,22 +26,10 @@ const getImagePath = (fileName: string) => {
 
 const floatingItems: FloatingItemData[] = [
     {
-        className: 'item-pool',
-        depth: 0.2,
-        src: getImagePath('pool.png'),
-        alt: 'Piscine',
-    },
-    {
         className: 'item-surf',
         depth: 0.8,
         src: getImagePath('surf.png'),
         alt: 'Surf',
-    },
-    {
-        className: 'item-kite',
-        depth: 1,
-        src: getImagePath('kitesurf.png'),
-        alt: 'Kitesurf',
     },
     {
         className: 'item-kitesurf-2',
