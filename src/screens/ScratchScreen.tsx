@@ -17,10 +17,11 @@ function ScratchScreen({ onReveal }: ScratchScreenProps) {
             </p>
 
             <ScratchCard onComplete={() => setIsScratched(true)}>
-                <div className="scratch-reward">
-                    <p>Surprise !</p>
-                    <strong>Un week-end au bord de l’océan 🌊</strong>
-                </div>
+                <img
+                    className="scratch-photo"
+                    src="/images/booking.PNG"
+                    alt="Photo du cadeau surprise"
+                />
             </ScratchCard>
 
             <button
