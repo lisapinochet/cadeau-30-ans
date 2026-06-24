@@ -138,6 +138,10 @@ function FloatingScene({ onReady }: FloatingSceneProps) {
     }, [onReady])
 
     useEffect(() => {
+        const clamp = (value: number, min: number, max: number) => {
+            return Math.min(Math.max(value, min), max)
+        }
+
         const handlePointerMove = (event: PointerEvent) => {
             const normalizedX = event.clientX / window.innerWidth - 0.5
             const normalizedY = event.clientY / window.innerHeight - 0.5
@@ -148,6 +152,21 @@ function FloatingScene({ onReady }: FloatingSceneProps) {
             })
         }
 
+        const handleDeviceOrientation = (event: DeviceOrientationEvent) => {
+
+            if (event.gamma === null || event.beta === null) {
+                return
+            }
+
+            const normalizedX = clamp(event.gamma / 25, -1, 1)
+            const normalizedY = clamp(event.beta / 25, -1, 1)
+
+            setMotion({
+                x: normalizedX * 16,
+                y: normalizedY * 16,
+            })
+        }
+
         const resetMotion = () => {
             setMotion({ x: 0, y: 0 })
         }
@@ -155,11 +174,13 @@ function FloatingScene({ onReady }: FloatingSceneProps) {
         window.addEventListener('pointermove', handlePointerMove)
         window.addEventListener('pointerup', resetMotion)
         window.addEventListener('pointerleave', resetMotion)
+        window.addEventListener('deviceorientation', handleDeviceOrientation)
 
         return () => {
             window.removeEventListener('pointermove', handlePointerMove)
             window.removeEventListener('pointerup', resetMotion)
             window.removeEventListener('pointerleave', resetMotion)
+            window.removeEventListener('deviceorientation', handleDeviceOrientation)
         }
     }, [])
 
